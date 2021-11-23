@@ -1,0 +1,7 @@
+{
+    "edgeLoginName": "nano",
+    "edgeLoginPassword": "@123",
+    "edgeHostIp": "192.168.1.5",
+    "edgeOpenFaaSPort": "8080",
+    "dockerHubUsername": "kaustubhrajput"
+}

@@ -1,0 +1,24 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  sorter:
+    lang: dockerfile
+    handler: ./sorter
+    image: cd21/sorter:latest
+    environment:
+        read_timeout: "5m5s"
+        write_timeout: "5m5s"
+        exec_timeout: "5m5s"
+    deploy:
+        resources:
+            # limits:   # Enable if you want to limit memory usage
+            #     memory: 200M
+            reservations:
+                memory: 100M
+        # restart_policy:
+        #     condition: on-failure
+        #     delay: 5s
+        #     max_attempts: 20
+        #     window: 380s

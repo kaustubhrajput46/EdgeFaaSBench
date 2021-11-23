@@ -1,0 +1,62 @@
+FROM openfaas/classic-watchdog:0.18.1 as watchdog
+FROM python:3
+
+
+COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
+RUN chmod +x /usr/bin/fwatchdog
+
+
+ENV PATH=$PATH:/home/app/.local/bin:/home/app/python/bin/
+ENV PYTHONPATH=$PYTHONPATH:/home/app/python
+
+
+RUN mkdir -p /home/app
+
+
+RUN \
+        apt-get update && apt-get install -y \
+        autoconf \
+        build-essential \
+        libtool \
+        bc \
+        automake \
+        git
+
+
+RUN \
+        apt-get install -y \
+        wget
+
+RUN 	ldconfig /usr/local/cuda-10.2/lib64
+VOLUME  ["/usr/local/cuda-10.2/", "/usr/local/cuda-10.2/"]
+
+#ENV	LD_LIBRARY_PATH=/usr/local/lib
+#RUN 	export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64:${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+WORKDIR /home/app
+RUN \
+        git clone https://github.com/kaustubhrajput46/yolo-custom.git
+
+#        git clone https://github.com/pjreddie/darknet && \
+#        cd darknet && \
+#        make && \
+#        wget https://pjreddie.com/media/files/yolov3-tiny.weights
+
+COPY exec.sh .
+RUN chmod 777 exec.sh
+
+#//Trying to create image using docker build -tcommand
+#ENV write_debug="true"
+#EXPOSE 8080
+#CMD ["sh", "exec.sh"]
+#RUN chmod 777 exec.sh
+#//end
+
+# Populate example here - i.e. "cat", "sha512sum" or "node index.js"
+ENV fprocess="./exec.sh"
+
+# Set to true to see request in function logs
+ENV write_debug="true"
+
+EXPOSE 8080
+CMD ["fwatchdog"]

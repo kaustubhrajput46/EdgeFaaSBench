@@ -1,0 +1,13 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  floating-point-operation-cosine:
+    lang: python3-debian
+    handler: ./floating-point-operation-cosine
+    image: kaustubhrajput/floating-point-operation-cosine:latest
+    environment:
+        read_timeout: 900s
+        write_timeout: 900s
+

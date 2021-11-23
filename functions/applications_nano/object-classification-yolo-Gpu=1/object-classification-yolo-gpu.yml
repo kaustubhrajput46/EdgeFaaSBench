@@ -1,0 +1,12 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  object-classification-yolo-gpu:
+    lang: dockerfile
+    handler: ./object-classification-yolo-gpu
+    image: kaustubhrajput/object-classification-yolo-gpu:latest
+    environment:
+        read_timeout: 900s
+        write_timeout: 900s

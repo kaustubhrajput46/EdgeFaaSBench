@@ -1,0 +1,12 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  matrix-multiplication-high:
+    lang: python3-debian
+    handler: ./matrix-multiplication-high
+    image: kaustubhrajput/matrix-multiplication-high:latest
+    environment:
+        read_timeout: 900s
+        write_timeout: 900s

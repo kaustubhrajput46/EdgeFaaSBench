@@ -1,0 +1,55 @@
+FROM ghcr.io/openfaas/classic-watchdog:0.1.4 as watchdog
+
+#FROM alpine:3.12
+FROM nvcr.io/nvidia/l4t-base:r32.4.4
+
+RUN apt-get update && apt-get install -y --no-install-recommends make g++
+RUN apt-get install --no-install-recommends --no-install-suggests -y ca-certificates
+
+
+#RUN mkdir -p /home/app
+
+COPY --from=watchdog /fwatchdog /usr/bin/fwatchdog
+RUN chmod +x /usr/bin/fwatchdog
+
+# Add non root user
+#RUN addgroup -S app && adduser app -S -G app
+#RUN chown app /home/app
+
+RUN \
+        apt-get update && apt-get install -y \
+        autoconf \
+        build-essential \
+        libtool \
+        bc \
+        automake \
+        git
+
+RUN mkdir -p /home/app
+WORKDIR /home/app
+
+RUN \
+        git clone https://github.com/kaustubhrajput46/yolo-custom.git
+
+
+
+#COPY exec.sh .
+#WORKDIR /yolo-custom
+COPY exec.sh .
+RUN chmod 777 exec.sh
+
+#USER app
+
+# Populate example here - i.e. "cat", "sha512sum" or "node index.js"
+#ENV fprocess="./darknet detect cfg/yolov3-tiny.cfg yolov3-tiny.weights data/dog.jpg"
+ENV fprocess="./exec.sh"
+# Set to true to see request in function logs
+ENV write_debug="false"
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=3s CMD [ -e /tmp/.lock ] || exit 1
+
+#CMD ["./exec.sh"]
+
+CMD ["fwatchdog"]

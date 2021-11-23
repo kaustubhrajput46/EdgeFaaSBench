@@ -1,0 +1,10 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  sentiment-analysis:
+    lang: python3-debian
+    handler: ./sentiment-analysis
+    image: kaustubhrajput/sentiment-analysis:latest
+

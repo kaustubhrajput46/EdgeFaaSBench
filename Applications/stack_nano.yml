@@ -1,0 +1,149 @@
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080  # can be a remote server
+
+# functions go here, but can be created in the UI too.
+functions:
+   # Object classification with cpu
+   object-classification-yolo-no-gpu:
+     lang: dockerfile
+     image: kaustubhrajput/object-classification-yolo-no-gpu:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+         
+   # Object classification with gpu 
+   object-classification-yolo-gpu:
+     lang: dockerfile
+     image: kaustubhrajput/object-classification-yolo-gpu:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+         
+   # Image classification with cpu 
+   image-classification-with-cpu:
+     lang: dockerfile
+     image: kaustubhrajput/image-classification-with-cpu:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+         
+   # Image classification with gpu
+   image-classification-with-cuda:
+     lang: dockerfile
+     image: kaustubhrajput/image-classification-with-cuda:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+         
+   # Image processing using pillow
+   image-processing-pillow:
+     lang: dockerfile
+     image: kaustubhrajput/image-processing-pillow:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+         
+   # Iperf3 function
+   iperf3:
+     lang: dockerfile
+     image: kaustubhrajput/iperf3:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+
+   # Fast fourier transform
+   fast-fourier-transform:
+     lang: dockerfile
+     image: kaustubhrajput/fast-fourier-transform:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+
+   # Floating point operation using cosine
+   floating-point-operation-cosine:
+     lang: dockerfile
+     image: kaustubhrajput/floating-point-operation-cosine:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+
+   # Floating point operation using sine
+   floating-point-operation-sine:
+     lang: dockerfile
+     image: kaustubhrajput/floating-point-operation-sine:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+
+   # Floating point operation using square root
+   floating-point-operation-sqrt:
+     lang: dockerfile
+     image: kaustubhrajput/floating-point-operation-sqrt:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+
+   # Matrix multiplication m = 2000, n = 100
+   matrix-multiplication-high:
+     lang: dockerfile
+     image: kaustubhrajput/matrix-multiplication-high:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+
+   # Matrix multiplication m = 1500, n = 100
+   matrix-multiplication-medium:
+     lang: dockerfile
+     image: kaustubhrajput/matrix-multiplication-medium:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+
+   # Matrix multiplication m = 2000, n = 100
+   matrix-multiplication-low:
+     lang: dockerfile
+     image: kaustubhrajput/matrix-multiplication-low:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+
+   # Speech to text function
+   speech-to-text:
+     lang: dockerfile
+     image: kaustubhrajput/speech-to-text:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+
+   # Sorting function
+   sorter:
+     lang: dockerfile
+     image: kaustubhrajput/sorter:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s
+
+   # Sentiment analysis function
+   sentiment-analysis:
+     lang: dockerfile
+     image: kaustubhrajput/sentiment-analysis:latest
+     environment:
+         read_timeout: 1500s
+         write_timeout: 1500s
+         exec_timeout: 1500s

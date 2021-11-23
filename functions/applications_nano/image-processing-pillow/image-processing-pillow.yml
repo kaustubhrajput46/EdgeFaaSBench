@@ -1,0 +1,13 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  image-processing-pillow:
+    lang: python3-debian
+    handler: ./image-processing-pillow
+    image: kaustubhrajput/image-processing-pillow:latest
+    environment:
+        read_timeout: 1500s
+        write_timeout: 1500s
+        exec_timeout: 1500s
